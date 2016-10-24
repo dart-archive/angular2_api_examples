@@ -1,0 +1,31 @@
+name: angular2_api_examples.testing
+
+dependencies:
+  angular2:
+  markdown:
+  ng_bootstrap:
+  sass_transformer:
+
+dev_dependencies:
+  browser:
+  mockito:
+  pageloader:
+  test:
+
+dependency_overrides:
+  angular2:
+    git: 
+      url: https://github.com/dart-lang/angular2
+      ref: 8cd7f35d74a9a8e323d6f0cf73ddda5acb079fe3
+
+transformers:
+  - angular2/transform/codegen:
+      platform_directives:
+          - package:angular2/common.dart#COMMON_DIRECTIVES
+  - angular2/transform/reflection_remover:
+      $include:
+          - test/issue_body_test.dart
+          - test/issue_list_test.dart
+          - web/main.dart
+  - test/pub_serve:                                                                                                                                                                                        
+      $include: test/**_test.dart
