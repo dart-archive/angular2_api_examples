@@ -1,3 +1,6 @@
-# Angular Dart 2 API Examples
+# AngularDart API Examples
 
-[AngularDart](https://angular.io/dart) examples use in the [API documentation](https://angular.io/docs/dart/latest/api/).
+[AngularDart][] examples used in the [API documentation][API].
+
+[AngularDart]: https://webdev.dartlang.org/angular
+[API]: https://webdev.dartlang.org/angular/api
