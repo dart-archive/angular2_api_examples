@@ -47,7 +47,8 @@ class IssueItemPO {
   Future<String> get title => _title.visibleText;
 
   /// Whether the button is toggled.
-  Future<bool> get isToggled async => (await _toggleButton.visibleText) == 'Hide';
+  Future<bool> get isToggled async =>
+      (await _toggleButton.visibleText) == 'Hide';
 
   /// Toggle the button.
   Future<Null> toggle() => _toggleButton.click();

@@ -82,14 +82,16 @@ class IssueBodyComponent {
   directives: const [
     NgIf,
   ],
-  styles: const [r'''
+  styles: const [
+    r'''
     a {
       display: block;
     }
-  '''],
+  '''
+  ],
   template: r'''
     <a [href]="safeUrl">{{issue.title}}</a>
-  ''', 
+  ''',
 )
 class IssueTitleComponent {
   final DomSanitizationService _sanitizer;
@@ -98,7 +100,7 @@ class IssueTitleComponent {
   SafeUrl _safeUrl;
 
   IssueTitleComponent(this._sanitizer);
-  
+
   /// Github issue model.
   GithubIssue get issue => _issue;
 

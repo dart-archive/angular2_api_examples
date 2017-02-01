@@ -1,58 +1,44 @@
+@Tags(const ['aot'])
 @TestOn('browser')
 library angular2_complex_test;
 
 import 'dart:async';
-
-// Replaced with code generation.
-import 'package:angular2/src/core/reflection/reflection.dart';
-import 'package:angular2/src/core/reflection/reflection_capabilities.dart';
-
-// Experimental. Will be published under package:angular2/testing.dart soon.
-import 'package:angular2/src/modules/testing/lib/testing.dart';
 
 import 'package:angular2_api_examples.testing/api.dart';
 import 'package:angular2_api_examples.testing/ui.dart';
 import 'package:angular2_api_examples.testing/testing.dart';
 
 import 'package:angular2/angular2.dart';
+import 'package:angular_test/angular_test.dart';
 import 'package:mockito/mockito_no_mirrors.dart';
-import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
-@Component(selector: 'test', directives: const [IssueListComponent], template: r'<issue-list></issue-list>',)
+@Component(
+  selector: 'test',
+  directives: const [IssueListComponent],
+  template: r'<issue-list></issue-list>',
+)
 class ComplexTestComponent {}
 
+@AngularEntrypoint()
 void main() {
-  reflector.reflectionCapabilities = new ReflectionCapabilities();
-
-  // tearDown(() => disposeAnyRunningTest());
+  tearDown(disposeAnyRunningTest);
 
   group('$IssueListComponent', () {
     test('should properly render markdown', () async {
       var stream = new StreamController<GithubIssue>();
       var service = new MockGithubService();
       when(service.getIssues()).thenReturn(stream.stream);
-      var testBed = new NgTestBed<ComplexTestComponent>()
-          .addProviders([
-            provide(GithubService, useValue: service),
-          ]);
+      var testBed = new NgTestBed<ComplexTestComponent>().addProviders([
+        provide(GithubService, useValue: service),
+      ]);
       var fixture = await testBed.create();
-      
-      // Create an instance of the in-browser page loader that uses our fixture.
-      var loader = new HtmlPageLoader(
-          fixture.element.parent,
-          executeSyncedFn: (c) async {
-            await c();
-            return fixture.update;
-          },
-          useShadowDom: false,
-      );
 
       // NOT REQUIRED: We just want to slow down the test to see it.
       await new Future.delayed(const Duration(seconds: 1));
 
       // Get a handle to the list.
-      IssueListPO list = await loader.getInstance(IssueListPO);
+      IssueListPO list = await fixture.resolvePageObject(IssueListPO);
       expect(await list.isLoading, isTrue);
       expect(await list.items, isEmpty);
 
