@@ -9,4 +9,6 @@ import 'async_pipe.dart';
     selector: 'my-app',
     templateUrl: 'app_component.html',
     directives: const [AsyncGreeterPipe, AsyncTimePipe])
-class AppComponent {}
+class AppComponent {
+  final String str = 'abcdefghij'; // used in slice pipe example
+}
