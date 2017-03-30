@@ -1,6 +1,5 @@
-# AngularDart API Examples
+# AngularDart API Examples - DEPRECATED REPO
 
-[AngularDart][] examples used in the [API documentation][API].
-
-[AngularDart]: https://webdev.dartlang.org/angular
-[API]: https://webdev.dartlang.org/angular/api
+Examples relocated to:
+- https://github.com/dart-lang/site-webdev/tree/master/examples/ng/api
+- https://github.com/dart-lang/site-webdev/tree/master/examples/ng_test/github_issues
